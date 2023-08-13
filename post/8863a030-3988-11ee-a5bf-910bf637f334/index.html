@@ -1,0 +1,239 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>矩阵乘法的一种理解 | Keep Thinking</title><meta name="author" content="Rocky"><meta name="copyright" content="Rocky"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="矩阵乘法的本质是什么？:矩阵乘法的本质是什么？ - 知乎 (zhihu.com)   矩阵乘法的本质坐标映射的几何解释（其一） 从坐标映射的角度来说，向量左乘矩阵是把向量各分向量变换到新的位置(对每一维的坐标进行映射), 然后通过向量加法(采用代数加法实现)得到结果。 所以对于b&#x3D;AX，相当于A的各列通过某种线性组合得到b.也就是说，b向量在A矩阵的列空间中  二维举例对于下面的矩阵乘法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="矩阵乘法的一种理解">
+<meta property="og:url" content="https://solasea.github.io/post/8863a030-3988-11ee-a5bf-910bf637f334/index.html">
+<meta property="og:site_name" content="Keep Thinking">
+<meta property="og:description" content="矩阵乘法的本质是什么？:矩阵乘法的本质是什么？ - 知乎 (zhihu.com)   矩阵乘法的本质坐标映射的几何解释（其一） 从坐标映射的角度来说，向量左乘矩阵是把向量各分向量变换到新的位置(对每一维的坐标进行映射), 然后通过向量加法(采用代数加法实现)得到结果。 所以对于b&#x3D;AX，相当于A的各列通过某种线性组合得到b.也就是说，b向量在A矩阵的列空间中  二维举例对于下面的矩阵乘法">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://rocky-box.oss-cn-beijing.aliyuncs.com/image/5.jpg">
+<meta property="article:published_time" content="2023-08-13T03:21:46.000Z">
+<meta property="article:modified_time" content="2023-08-13T07:57:28.392Z">
+<meta property="article:author" content="Rocky">
+<meta property="article:tag" content="机器人学">
+<meta property="article:tag" content="线性代数">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://rocky-box.oss-cn-beijing.aliyuncs.com/image/5.jpg"><link rel="shortcut icon" href="/img/mylogo.png"><link rel="canonical" href="https://solasea.github.io/post/8863a030-3988-11ee-a5bf-910bf637f334/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '矩阵乘法的一种理解',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: undefined,
+  isToc: true,
+  postUpdate: '2023-08-13 15:57:28'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load',() => { preloader.endLoading() })
+
+  if (false) {
+    document.addEventListener('pjax:send', () => { preloader.initLoading() })
+    document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+  }
+})()</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/head.jpeg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">4</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-chain"></i><span> 索引</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/Done/"><i class="fa-fw fas fa-check"></i><span> 项目</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/GalleryGroup/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/timeline/"><i class="fa-fw fas fa-paperclip"></i><span> 小记</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://rocky-box.oss-cn-beijing.aliyuncs.com/image/5.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Keep Thinking"><img class="site-icon" src="/img/mylogo.png"/><span class="site-name">Keep Thinking</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-chain"></i><span> 索引</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/Done/"><i class="fa-fw fas fa-check"></i><span> 项目</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/GalleryGroup/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/timeline/"><i class="fa-fw fas fa-paperclip"></i><span> 小记</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">矩阵乘法的一种理解</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-08-13T03:21:46.000Z" title="发表于 2023-08-13 11:21:46">2023-08-13</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-08-13T07:57:28.392Z" title="更新于 2023-08-13 15:57:28">2023-08-13</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%AD%A6/">机器人学</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="矩阵乘法的一种理解"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><div class="note blue no-icon flat"><p>矩阵乘法的本质是什么？:<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/21351965">矩阵乘法的本质是什么？ - 知乎 (zhihu.com)</a></p>
+</div>
+
+<h3 id="矩阵乘法的本质"><a href="#矩阵乘法的本质" class="headerlink" title="矩阵乘法的本质"></a>矩阵乘法的本质</h3><h4 id="坐标映射的几何解释（其一）"><a href="#坐标映射的几何解释（其一）" class="headerlink" title="坐标映射的几何解释（其一）"></a>坐标映射的几何解释（其一）</h4><blockquote>
+<p><strong>从坐标映射的角度来说，向量左乘矩阵是把向量各分向量变换到新的位置(对每一维的坐标进行映射), 然后通过向量加法(采用代数加法实现)得到结果。</strong></p>
+<p>所以对于b&#x3D;AX，相当于A的<strong>各列通过某种线性组合</strong>得到b.也就是说，<strong>b向量在A矩阵的列空间中</strong></p>
+</blockquote>
+<h4 id="二维举例"><a href="#二维举例" class="headerlink" title="二维举例"></a>二维举例</h4><p>对于下面的矩阵乘法：<br>$$<br>\left[<br>\begin{matrix}<br>  1  \\<br>  5<br>\end{matrix}<br>\right]&#x3D;<br>\left[<br>\begin{matrix}<br>  2 &amp; -1 \\<br>  1 &amp;  4<br>\end{matrix}<br>\right]<br>\left[<br>\begin{matrix}<br>  1  \\<br>  1<br>\end{matrix}<br>\right]<br>$$<br><img src="https://rocky-box.oss-cn-beijing.aliyuncs.com/image/202308131436184.png" alt="image-20230813143627939"></p>
+<p>由矩阵乘法的分配律C(A+B)&#x3D;CA+CB 可得<br>$$<br>\left[<br>\begin{matrix}<br>  1  \\<br>  1<br>\end{matrix}<br>\right]&#x3D;<br>\left[<br>\begin{matrix}<br>  1  \\<br>  0<br>\end{matrix}<br>\right]+<br>\left[<br>\begin{matrix}<br>  0  \\<br>  1<br>\end{matrix}<br>\right]<br>$$</p>
+<p>$$<br>\left[<br>\begin{matrix}<br>  2 &amp; -1  \\<br>  1 &amp; 4<br>\end{matrix}<br>\right](<br>\left[<br>\begin{matrix}<br>  1  \\<br>  0<br>\end{matrix}<br>\right]+<br>\left[<br>\begin{matrix}<br>  0  \\<br>  1<br>\end{matrix}<br>\right])&#x3D;<br>\left[<br>\begin{matrix}<br>  2 &amp; -1  \\<br>  1 &amp; 4<br>\end{matrix}<br>\right]<br>\left[<br>\begin{matrix}<br>  1  \\<br>  0<br>\end{matrix}<br>\right]+<br>\left[<br>\begin{matrix}<br>  2 &amp; -1  \\<br>  1 &amp; 4<br>\end{matrix}<br>\right]<br>\left[<br>\begin{matrix}<br>  0  \\<br>  1<br>\end{matrix}<br>\right]<br>$$</p>
+<p>对于横轴单位向量（1，0），有<br>$$<br>\left[<br>\begin{matrix}<br>  2 &amp; -1  \\<br>  1 &amp; 4<br>\end{matrix}<br>\right]<br>\left[<br>\begin{matrix}<br>  1  \\<br>  0<br>\end{matrix}<br>\right]&#x3D;<br>\left[<br>\begin{matrix}<br>  2  \\<br>  1<br>\end{matrix}<br>\right]*1<br>$$<br>对于纵轴单位向量（0，1），有<br>$$<br>\left[<br>\begin{matrix}<br>  2 &amp; -1  \\<br>  1 &amp; 4<br>\end{matrix}<br>\right]<br>\left[<br>\begin{matrix}<br>  0 \\<br>  1<br>\end{matrix}<br>\right]&#x3D;<br>\left[<br>\begin{matrix}<br>  -1  \\<br>  4<br>\end{matrix}<br>\right]*1<br>$$<br>即（1，0）经过坐标映射后的新坐标为（2，1），</p>
+<p>即（0，1）经过坐标映射后的新坐标为（-1，4），</p>
+<p>矢量相加后可得<br>$$<br>\left[<br>\begin{matrix}<br>  1  \\<br>  5<br>\end{matrix}<br>\right]&#x3D;<br>\left[<br>\begin{matrix}<br>  2  \\<br>  1<br>\end{matrix}<br>\right]*1+<br>\left[<br>\begin{matrix}<br>  -1  \\<br>  4<br>\end{matrix}<br>\right]*1<br>$$<br>即（1，1）经过坐标映射后的新坐标为（1，5）。</p>
+<h4 id="拓展至高维"><a href="#拓展至高维" class="headerlink" title="拓展至高维"></a>拓展至高维</h4><p>同理，扩展到高维矩阵中<br>$$<br>\left[<br>\begin{matrix}<br>  B1  \\<br>  B2  \\<br>  .   \\<br>  .  \\<br>  Bn<br>\end{matrix}<br>\right]&#x3D;<br>\left[<br>\begin{matrix}<br>  A11  &amp;  A12  &amp; … &amp;A1n \\<br>  A21  &amp;  A21  &amp; … &amp;A2n\\<br>  .   \\<br>  .  \\<br>  An1 &amp;  An2  &amp; … &amp;Ann<br>\end{matrix}<br>\right]<br>\left[<br>\begin{matrix}<br>  X1  \\<br>  X2  \\<br>  .   \\<br>  .  \\<br>  Xn<br>\end{matrix}<br>\right]<br>$$<br>变换可得<br>$$<br>\left[<br>\begin{matrix}<br>  B1  \\<br>  B2  \\<br>  .   \\<br>  .  \\<br>  Bn<br>\end{matrix}<br>\right]&#x3D;<br>\left[<br>\begin{matrix}<br>  A11  \\<br>  A21  \\<br>  .    \\<br>  .    \\<br>  An1  \\<br>\end{matrix}<br>\right]*X1+<br>\left[<br>\begin{matrix}<br>  A12  \\<br>  A22  \\<br>  .    \\<br>  .    \\<br>  An2  \\<br>\end{matrix}<br>\right]*X2+…+<br>\left[<br>\begin{matrix}<br>  A1n  \\<br>  A2n  \\<br>  .    \\<br>  .    \\<br>  Ann  \\<br>\end{matrix}<br>\right]*Xn<br>$$</p>
+<blockquote>
+<p>即对于b&#x3D;AX，相当于A的<strong>各列通过某种线性组合</strong>得到b.也就是说，<strong>b向量在A矩阵的列空间中</strong></p>
+</blockquote>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://solasea.github.io">Rocky</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://solasea.github.io/post/8863a030-3988-11ee-a5bf-910bf637f334/">https://solasea.github.io/post/8863a030-3988-11ee-a5bf-910bf637f334/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://solasea.github.io" target="_blank">Keep Thinking</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%AD%A6/">机器人学</a><a class="post-meta__tags" href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/">线性代数</a></div><div class="post_share"><div class="social-share" data-image="https://rocky-box.oss-cn-beijing.aliyuncs.com/image/5.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/post/e7eaf830-2873-11ee-8b6b-4bd9986f41cd/" title="Butterfly主题与基础美化-中篇"><img class="cover" src="https://rocky-box.oss-cn-beijing.aliyuncs.com/image/4.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Butterfly主题与基础美化-中篇</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/head.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Rocky</div><div class="author-info__description">保持思考，付诸行动</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">4</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95%E7%9A%84%E6%9C%AC%E8%B4%A8"><span class="toc-number">1.</span> <span class="toc-text">矩阵乘法的本质</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9D%90%E6%A0%87%E6%98%A0%E5%B0%84%E7%9A%84%E5%87%A0%E4%BD%95%E8%A7%A3%E9%87%8A%EF%BC%88%E5%85%B6%E4%B8%80%EF%BC%89"><span class="toc-number">1.1.</span> <span class="toc-text">坐标映射的几何解释（其一）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E7%BB%B4%E4%B8%BE%E4%BE%8B"><span class="toc-number">1.2.</span> <span class="toc-text">二维举例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8B%93%E5%B1%95%E8%87%B3%E9%AB%98%E7%BB%B4"><span class="toc-number">1.3.</span> <span class="toc-text">拓展至高维</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/post/8863a030-3988-11ee-a5bf-910bf637f334/" title="矩阵乘法的一种理解"><img src="https://rocky-box.oss-cn-beijing.aliyuncs.com/image/5.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="矩阵乘法的一种理解"/></a><div class="content"><a class="title" href="/post/8863a030-3988-11ee-a5bf-910bf637f334/" title="矩阵乘法的一种理解">矩阵乘法的一种理解</a><time datetime="2023-08-13T03:21:46.000Z" title="发表于 2023-08-13 11:21:46">2023-08-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/e7eaf830-2873-11ee-8b6b-4bd9986f41cd/" title="Butterfly主题与基础美化-中篇"><img src="https://rocky-box.oss-cn-beijing.aliyuncs.com/image/4.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Butterfly主题与基础美化-中篇"/></a><div class="content"><a class="title" href="/post/e7eaf830-2873-11ee-8b6b-4bd9986f41cd/" title="Butterfly主题与基础美化-中篇">Butterfly主题与基础美化-中篇</a><time datetime="2023-07-22T09:41:17.000Z" title="发表于 2023-07-22 17:41:17">2023-07-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/6b5f0680-27ce-11ee-8433-57a19fe510a9/" title="Hexo+github搭建个人博客-初篇"><img src="https://rocky-box.oss-cn-beijing.aliyuncs.com/image/1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Hexo+github搭建个人博客-初篇"/></a><div class="content"><a class="title" href="/post/6b5f0680-27ce-11ee-8433-57a19fe510a9/" title="Hexo+github搭建个人博客-初篇">Hexo+github搭建个人博客-初篇</a><time datetime="2023-07-21T13:56:41.000Z" title="发表于 2023-07-21 21:56:41">2023-07-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/456dda70-27c2-11ee-8761-1561a4051a22/" title="Welcome to my blog"><img src="https://rocky-box.oss-cn-beijing.aliyuncs.com/image/3.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Welcome to my blog"/></a><div class="content"><a class="title" href="/post/456dda70-27c2-11ee-8761-1561a4051a22/" title="Welcome to my blog">Welcome to my blog</a><time datetime="2023-07-19T05:42:16.860Z" title="发表于 2023-07-19 13:42:16">2023-07-19</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Rocky</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Good Night</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/fireworks.min.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
